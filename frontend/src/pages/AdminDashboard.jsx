@@ -29,13 +29,20 @@ const AdminDashboard = () => {
     }, [user]);
 
     const fetchData = async () => {
+        // Fetch Orders
         try {
             const ordersRes = await api.get('/api/orders/all');
-            const productsRes = await api.get('/api/products');
             setOrders(ordersRes.data);
+        } catch (e) {
+            console.error('Error fetching orders:', e);
+        }
+
+        // Fetch Products
+        try {
+            const productsRes = await api.get('/api/products');
             setProducts(productsRes.data);
         } catch (e) {
-            console.error(e);
+            console.error('Error fetching products:', e);
         }
     };
 
