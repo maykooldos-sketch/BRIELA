@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useNotification } from '../context/NotificationContext';
@@ -14,7 +15,7 @@ const Dashboard = () => {
 
     const fetchOrders = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/orders');
+            const res = await api.get('/api/orders');
             setOrders(res.data);
         } catch (error) {
             console.error('Error fetching orders', error);
@@ -35,7 +36,7 @@ const Dashboard = () => {
             '¿Estás seguro de que deseas cancelar este pedido? Esta acción no se puede deshacer.',
             async () => {
                 try {
-                    await axios.delete(`http://localhost:3001/api/orders/${id}`);
+                    await api.delete(`/api/orders/${id}`);
                     showNotification('Pedido cancelado con éxito');
                     fetchOrders();
                 } catch (error) {

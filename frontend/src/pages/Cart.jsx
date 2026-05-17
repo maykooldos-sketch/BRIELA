@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useNotification } from '../context/NotificationContext';
@@ -21,7 +22,7 @@ const Cart = () => {
 
     const fetchCart = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/cart');
+            const res = await api.get('/api/cart');
             setCartItems(res.data);
         } catch (error) {
             console.error(error);
@@ -30,7 +31,7 @@ const Cart = () => {
 
     const handleRemove = async (productId) => {
         try {
-            await axios.delete(`http://localhost:3001/api/cart/${productId}`);
+            await api.delete(`/api/cart/${productId}`);
             showNotification('Item eliminado');
             fetchCart();
         } catch (error) {
@@ -40,7 +41,7 @@ const Cart = () => {
 
     const processOrder = async (method) => {
         try {
-            await axios.post('http://localhost:3001/api/orders');
+            await api.post('/api/orders');
             showNotification(`¡Pago con ${method} exitoso!`);
             navigate('/dashboard');
         } catch (error) {

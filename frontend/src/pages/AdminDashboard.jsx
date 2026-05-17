@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import api, { API_URL } from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useNotification } from '../context/NotificationContext';
@@ -29,8 +30,8 @@ const AdminDashboard = () => {
 
     const fetchData = async () => {
         try {
-            const ordersRes = await axios.get('http://localhost:3001/api/orders/all');
-            const productsRes = await axios.get('http://localhost:3001/api/products');
+            const ordersRes = await api.get('/api/orders/all');
+            const productsRes = await api.get('/api/products');
             setOrders(ordersRes.data);
             setProducts(productsRes.data);
         } catch (e) {
@@ -40,7 +41,7 @@ const AdminDashboard = () => {
 
     const updateOrderStatus = async (id, status) => {
         try {
-            await axios.put(`http://localhost:3001/api/orders/${id}/status`, { status });
+            await api.put(`/api/orders/${id}/status`, { status });
             fetchData();
             showNotification('Estado actualizado');
         } catch (e) {
@@ -50,7 +51,7 @@ const AdminDashboard = () => {
 
     const updateTracking = async (id, carrier, trackingId) => {
         try {
-            await axios.put(`http://localhost:3001/api/orders/${id}/status`, { carrier, trackingId });
+            await api.put(`/api/orders/${id}/status`, { carrier, trackingId });
             fetchData();
             showNotification('Información de envío guardada');
         } catch (e) {
@@ -64,7 +65,7 @@ const AdminDashboard = () => {
             '¿Deseas eliminar este pedido permanentemente del registro?',
             async () => {
                 try {
-                    await axios.delete(`http://localhost:3001/api/orders/${id}`);
+                    await api.delete(`/api/orders/${id}`);
                     fetchData();
                     showNotification('Pedido eliminado');
                 } catch (e) {
@@ -93,7 +94,7 @@ const AdminDashboard = () => {
                 });
             }
 
-            await axios.post('http://localhost:3001/api/products', formData);
+            await api.post('/api/products', formData);
 
             setNewProduct({ name: '', description: '', price: '', category: 'pulseras', stock: 1, images: [] });
             fetchData();
@@ -110,7 +111,7 @@ const AdminDashboard = () => {
             '¿Seguro quieres eliminar esta joya permanentemente del catálogo?',
             async () => {
                 try {
-                    await axios.delete(`http://localhost:3001/api/products/${id}`);
+                    await api.delete(`/api/products/${id}`);
                     fetchData();
                     showNotification('Producto eliminado');
                 } catch (e) {
@@ -138,7 +139,7 @@ const AdminDashboard = () => {
                 });
             }
 
-            await axios.put(`http://localhost:3001/api/products/${id}`, formData);
+            await api.put(`/api/products/${id}`, formData);
             setEditingId(null);
             fetchData();
             showNotification('¡Producto actualizado!');
@@ -225,7 +226,7 @@ const AdminDashboard = () => {
 
                                     <div style={{ marginRight: '15px', width: '80px', height: '80px', flexShrink: 0, backgroundColor: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         {p.images && p.images.length > 0 ? (
-                                            <img src={p.images[0].startsWith('http') ? p.images[0] : `http://localhost:3001/${p.images[0]}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                            <img src={p.images[0].startsWith('http') ? p.images[0] : `${API_URL}/${p.images[0]}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         ) : (
                                             <span style={{ fontSize: '0.6rem', color: '#999' }}>Sin Fotos</span>
                                         )}

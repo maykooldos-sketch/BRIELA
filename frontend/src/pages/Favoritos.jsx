@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import api, { API_URL } from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { useNotification } from '../context/NotificationContext';
@@ -20,7 +21,7 @@ const Favoritos = () => {
 
     const fetchWishlist = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/wishlist');
+            const res = await api.get('/api/wishlist');
             setWishlist(res.data);
         } catch (error) {
             console.error(error);
@@ -30,7 +31,7 @@ const Favoritos = () => {
     const removeFromWishlist = async (productId, e) => {
         if (e) e.preventDefault();
         try {
-            await axios.post(`http://localhost:3001/api/wishlist/${productId}`);
+            await api.post(`/api/wishlist/${productId}`);
             showNotification('Eliminado de favoritos');
             fetchWishlist();
         } catch (error) {
@@ -41,7 +42,7 @@ const Favoritos = () => {
     const addToCart = async (productId, e) => {
         if (e) e.preventDefault();
         try {
-            await axios.post('http://localhost:3001/api/cart', { product_id: productId, quantity: 1 });
+            await api.post('/api/cart', { product_id: productId, quantity: 1 });
             showNotification('Añadido al carrito');
         } catch (error) {
             showNotification('Error al añadir al carrito', 'error');
@@ -75,7 +76,7 @@ const Favoritos = () => {
                                 }}>
                                     {product.images && product.images.length > 0 ? (
                                         <img
-                                            src={product.images[0].startsWith('http') ? product.images[0] : `http://localhost:3001/${product.images[0]}`}
+                                            src={product.images[0].startsWith('http') ? product.images[0] : `${API_URL}/${product.images[0]}`}
                                             alt={product.name}
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import api, { API_URL } from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { useNotification } from '../context/NotificationContext';
 
@@ -16,7 +17,7 @@ const ProductDetails = () => {
     const fetchWishlist = async () => {
         if (!user) return;
         try {
-            const res = await axios.get('http://localhost:3001/api/wishlist');
+            const res = await api.get('/api/wishlist');
             setWishlist(res.data.map(item => item._id || item));
         } catch (error) {
             console.error(error);
@@ -26,7 +27,7 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProductData = async () => {
             try {
-                const res = await axios.get(`http://localhost:3001/api/products/${id}`);
+                const res = await api.get(`/api/products/${id}`);
                 setProduct(res.data);
                 await fetchWishlist();
             } catch (error) {
@@ -42,7 +43,7 @@ const ProductDetails = () => {
             return;
         }
         try {
-            const res = await axios.post(`http://localhost:3001/api/wishlist/${product._id}`);
+            const res = await api.post(`/api/wishlist/${product._id}`);
             showNotification(res.data.message);
             fetchWishlist();
         } catch (error) {
@@ -56,7 +57,7 @@ const ProductDetails = () => {
             return;
         }
         try {
-            await axios.post('http://localhost:3001/api/cart', { product_id: product._id, quantity: 1 });
+            await api.post('/api/cart', { product_id: product._id, quantity: 1 });
             showNotification('Añadido al carrito con éxito');
         } catch (error) {
             showNotification('Error al añadir al carrito', 'error');
@@ -85,7 +86,7 @@ const ProductDetails = () => {
                     }}>
                         {product.images && product.images.length > 0 ? (
                             <img
-                                src={product.images[mainImage].startsWith('http') ? product.images[mainImage] : `http://localhost:3001/${product.images[mainImage]}`}
+                                src={product.images[mainImage].startsWith('http') ? product.images[mainImage] : `${API_URL}/${product.images[mainImage]}`}
                                 alt={product.name}
                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
@@ -110,7 +111,7 @@ const ProductDetails = () => {
                                 }}
                             >
                                 <img
-                                    src={img.startsWith('http') ? img : `http://localhost:3001/${img}`}
+                                    src={img.startsWith('http') ? img : `${API_URL}/${img}`}
                                     alt={`Miniatura ${index}`}
                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                 />

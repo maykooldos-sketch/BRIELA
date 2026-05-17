@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import api, { API_URL } from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useNotification } from '../context/NotificationContext';
@@ -19,7 +20,7 @@ const Home = () => {
     const fetchWishlist = async () => {
         if (!user) return;
         try {
-            const res = await axios.get('http://localhost:3001/api/wishlist');
+            const res = await api.get('/api/wishlist');
             setWishlist(res.data.map(item => item._id || item)); // Guardamos solo IDs
         } catch (error) {
             console.error(error);
@@ -30,7 +31,7 @@ const Home = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const res = await axios.get('http://localhost:3001/api/products');
+                const res = await api.get('/api/products');
                 setProducts(res.data);
                 setFilteredProducts(res.data);
                 await fetchWishlist();
@@ -67,7 +68,7 @@ const Home = () => {
             return;
         }
         try {
-            const res = await axios.post(`http://localhost:3001/api/wishlist/${productId}`);
+            const res = await api.post(`/api/wishlist/${productId}`);
             showNotification(res.data.message);
             fetchWishlist();
         } catch (error) {
@@ -82,7 +83,7 @@ const Home = () => {
             return;
         }
         try {
-            await axios.post('http://localhost:3001/api/cart', { product_id: productId, quantity: 1 });
+            await api.post('/api/cart', { product_id: productId, quantity: 1 });
             showNotification('Añadido al carrito con éxito');
         } catch (error) {
             showNotification('Error al añadir al carrito', 'error');
@@ -148,7 +149,7 @@ const Home = () => {
                                 }}>
                                     {product.images && product.images.length > 0 ? (
                                         <img
-                                            src={product.images[0].startsWith('http') ? product.images[0] : `http://localhost:3001/${product.images[0]}`}
+                                            src={product.images[0].startsWith('http') ? product.images[0] : `${API_URL}/${product.images[0]}`}
                                             alt={product.name}
                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                         />
