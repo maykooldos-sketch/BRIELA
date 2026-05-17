@@ -1,0 +1,12 @@
+node_modules
+.env
+.DS_Store
+dist
+build
+.vercel
+.render
+*.log
+backend/uploads/*
+!backend/uploads/.gitkeep
+frontend/.env
+backend/.env
