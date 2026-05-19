@@ -7,9 +7,8 @@ dotenv.config();
 const seedProducts = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI);
-        console.log('✅ Conectado a MongoDB local.');
+        console.log('Conectado a MongoDB.');
 
-        // Limpiamos los productos de prueba que hubieran antes
         await Product.deleteMany();
 
         const sampleProducts = [
@@ -48,10 +47,10 @@ const seedProducts = async () => {
         ];
 
         await Product.insertMany(sampleProducts);
-        console.log('✅ Inventario premium inyectado correctamente.');
+        console.log('Inventario inyectado correctamente.');
         process.exit();
     } catch (error) {
-        console.error('❌ Error inyectando inventario. ¿Aseguraste que MongoDB esté encendido localmente?', error.message);
+        console.error('Error inyectando inventario:', error.message);
         process.exit(1);
     }
 };

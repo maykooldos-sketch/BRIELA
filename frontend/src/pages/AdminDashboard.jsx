@@ -13,9 +13,8 @@ const AdminDashboard = () => {
     const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
     const [products, setProducts] = useState([]);
-    const [tab, setTab] = useState('products'); // Empezamos en productos para que lo vea enseguida
+    const [tab, setTab] = useState('products');
 
-    // Formularios
     const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '', category: 'pulseras', stock: 1, images: [] });
     const [editingId, setEditingId] = useState(null);
     const [editData, setEditData] = useState({ name: '', description: '', price: '', category: 'pulseras', stock: '', images: [] });
@@ -29,7 +28,6 @@ const AdminDashboard = () => {
     }, [user]);
 
     const fetchData = async () => {
-        // Fetch Orders
         try {
             const ordersRes = await api.get('/api/orders/all');
             setOrders(ordersRes.data);
@@ -37,7 +35,6 @@ const AdminDashboard = () => {
             console.error('Error fetching orders:', e);
         }
 
-        // Fetch Products
         try {
             const productsRes = await api.get('/api/products');
             setProducts(productsRes.data);
@@ -88,7 +85,6 @@ const AdminDashboard = () => {
             const formData = new FormData();
             formData.append('name', newProduct.name);
             formData.append('description', newProduct.description);
-            // Limpiar puntos si el usuario los escribió (ej: 180.000 -> 180000)
             const cleanPrice = String(newProduct.price).replace(/\./g, '');
             const cleanStock = String(newProduct.stock).replace(/\./g, '');
             formData.append('price', Number(cleanPrice));
@@ -133,7 +129,6 @@ const AdminDashboard = () => {
             const formData = new FormData();
             formData.append('name', editData.name);
             formData.append('description', editData.description);
-            // Limpiar puntos si el usuario los escribió
             const cleanPrice = String(editData.price).replace(/\./g, '');
             const cleanStock = String(editData.stock).replace(/\./g, '');
             formData.append('price', Number(cleanPrice));
@@ -174,7 +169,6 @@ const AdminDashboard = () => {
 
             {tab === 'products' && (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.5fr', gap: '40px' }}>
-                    {/* FORMULARIO DE CREACIÓN */}
                     <div style={{ padding: '20px', border: '1px solid var(--color-border)', backgroundColor: '#fafafa' }}>
                         <h3 style={{ fontSize: '1.2rem', marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>AÑADIR JOYA</h3>
                         <form onSubmit={createProduct}>
@@ -222,7 +216,6 @@ const AdminDashboard = () => {
                         </form>
                     </div>
 
-                    {/* VISTA GENERAL DEL CATÁLOGO */}
                     <div>
                         <h3 style={{ fontSize: '1.2rem', marginBottom: '20px' }}>CATÁLOGO PUBLICADO</h3>
                         <div style={{ borderTop: '2px solid var(--color-text)' }}>
@@ -332,7 +325,6 @@ const AdminDashboard = () => {
                                                 <option value="entregado">Entregado</option>
                                             </select>
 
-                                            {/* Tracking Info Inline */}
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: '5px' }}>
                                                 <input
                                                     type="text"

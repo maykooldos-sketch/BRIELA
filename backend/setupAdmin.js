@@ -8,10 +8,8 @@ const setup = async () => {
         await mongoose.connect(process.env.MONGO_URI);
         const email = 'admin@briela.com';
 
-        // Remove if exists
         await User.deleteOne({ email });
 
-        // Create new admin
         const hash = await bcrypt.hash('admin123', 10);
         await User.create({
             name: 'Master Admin',
@@ -20,7 +18,7 @@ const setup = async () => {
             role: 'admin'
         });
 
-        console.log('✅ CREADO CORRECTAMENTE EL ADMIN');
+        console.log('ADMIN CREADO CORRECTAMENTE');
         process.exit(0);
     } catch (e) {
         console.error(e);

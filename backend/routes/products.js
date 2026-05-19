@@ -5,7 +5,6 @@ const authMiddleware = require('../middleware/auth');
 const multer = require('multer');
 const { storage: cloudinaryStorage } = require('../config/cloudinary');
 
-// Usamos el almacenamiento de Cloudinary si las llaves están configuradas
 const upload = multer({
     storage: (process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_KEY !== 'tu_api_key')
         ? cloudinaryStorage
@@ -15,7 +14,6 @@ const upload = multer({
         })
 });
 
-// GET /api/products - Buscar catálogo
 router.get('/', async (req, res) => {
     try {
         const { category, search } = req.query;
@@ -31,7 +29,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET /api/products/:id
 router.get('/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
@@ -42,14 +39,12 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// POST /api/products - Crear nuevo producto
 router.post('/', authMiddleware, upload.array('images', 5), async (req, res) => {
     try {
         if (req.user.role !== 'admin') return res.status(403).json({ error: 'Acceso solo para administradores.' });
 
         const productData = req.body;
         if (req.files && req.files.length > 0) {
-            // Cloudinary devuelve 'path' o 'secure_url', local devuelve 'filename'
             productData.images = req.files.map(file => file.path || 'uploads/' + file.filename);
         }
 
@@ -62,7 +57,6 @@ router.post('/', authMiddleware, upload.array('images', 5), async (req, res) => 
     }
 });
 
-// PUT /api/products/:id - Actualizar
 router.put('/:id', authMiddleware, upload.array('images', 5), async (req, res) => {
     try {
         if (req.user.role !== 'admin') return res.status(403).json({ error: 'Acceso denegado.' });
@@ -81,7 +75,6 @@ router.put('/:id', authMiddleware, upload.array('images', 5), async (req, res) =
     }
 });
 
-// DELETE /api/products/:id
 router.delete('/:id', authMiddleware, async (req, res) => {
     try {
         if (req.user.role !== 'admin') return res.status(403).json({ error: 'Acceso denegado.' });

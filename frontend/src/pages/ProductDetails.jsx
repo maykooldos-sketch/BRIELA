@@ -151,7 +151,7 @@ const ProductDetails = () => {
                                 color: wishlist.includes(product?._id) ? '#ff4d4d' : '#000',
                                 transition: 'all 0.3s'
                             }}>
-                            {wishlist.includes(product?._id) ? 'FAV' : 'ADD'}
+                            {wishlist.includes(product?._id) ? '♥' : '♡'}
                         </button>
                     </div>
 
