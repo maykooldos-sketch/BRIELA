@@ -110,7 +110,7 @@ const Favoritos = () => {
                                     color: '#ff4d4d'
                                 }}
                             >
-                                ♥
+                                QUITAR
                             </button>
 
                             <button className="btn btn-outline" style={{ marginTop: '10px' }} onClick={(e) => addToCart(product._id, e)}>AÑADIR AL CARRITO</button>

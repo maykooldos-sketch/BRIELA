@@ -105,7 +105,7 @@ const AdminDashboard = () => {
 
             setNewProduct({ name: '', description: '', price: '', category: 'pulseras', stock: 1, images: [] });
             fetchData();
-            showNotification('¡Producto creado con éxito!');
+            showNotification('Producto creado con éxito');
         } catch (e) {
             console.error('Error al crear producto:', e.response?.data || e.message);
             showNotification('Error creando producto. Revisa la consola.', 'error');
@@ -149,7 +149,7 @@ const AdminDashboard = () => {
             await api.put(`/api/products/${id}`, formData);
             setEditingId(null);
             fetchData();
-            showNotification('¡Producto actualizado!');
+            showNotification('Producto actualizado');
         } catch (e) {
             console.error('Error al actualizar producto:', e.response?.data || e.message);
             showNotification('Error al actualizar el producto', 'error');

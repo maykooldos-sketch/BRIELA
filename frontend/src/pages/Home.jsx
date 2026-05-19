@@ -185,7 +185,7 @@ const Home = () => {
                                     transition: 'color 0.3s'
                                 }}
                             >
-                                {wishlist.includes(product._id) ? '♥' : '♡'}
+                                {wishlist.includes(product._id) ? 'FAV' : 'ADD'}
                             </button>
 
                             <button className="btn btn-outline" style={{ marginTop: '10px' }} onClick={(e) => addToCart(product._id, e)}>AÑADIR AL CARRITO</button>

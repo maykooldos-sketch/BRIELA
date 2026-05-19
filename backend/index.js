@@ -32,6 +32,11 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Algo salió mal en el servidor.' });
 });
 
+const fs = require('fs');
+if (!fs.existsSync('uploads')) {
+    fs.mkdirSync('uploads');
+}
+
 app.listen(PORT, () => {
-    console.log(`🚀 Backend de BRIELA corriendo en http://localhost:${PORT}`);
+    console.log(`Backend de BRIELA corriendo en el puerto ${PORT}`);
 });

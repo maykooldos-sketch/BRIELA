@@ -7,7 +7,7 @@ const User = require('../models/User');
 const { sendResetPasswordEmail } = require('../utils/emailService');
 require('dotenv').config();
 
-// POST /api/auth/register
+
 router.post('/register', async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// POST /api/auth/login
+
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// POST /api/auth/forgot-password
+
 router.post('/forgot-password', async (req, res) => {
     try {
         const { email } = req.body;
@@ -73,7 +73,7 @@ router.post('/forgot-password', async (req, res) => {
     }
 });
 
-// POST /api/auth/reset-password/:token
+
 router.post('/reset-password/:token', async (req, res) => {
     try {
         const { password } = req.body;
