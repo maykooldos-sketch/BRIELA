@@ -150,13 +150,20 @@ a:hover {
 
 .navbar .logo {
   font-family: var(--font-serif);
-  font-size: 2rem;
-  letter-spacing: 0.3em;
-  font-weight: 400;
+  font-size: 2.2rem;
+  letter-spacing: 0.25em;
+  font-weight: 600;
   color: #000;
   text-align: center;
-  margin: 0 40px;
+  margin: 0 20px;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
 }
+
+.navbar .logo:hover {
+  transform: scale(1.02);
+}
+
 
 /* Enlaces Desktop */
 .desktop-nav-links,
@@ -347,10 +354,11 @@ a:hover {
   }
 
   .navbar .logo {
-    font-size: 1.5rem;
-    letter-spacing: 0.2em;
+    font-size: 1.8rem;
+    letter-spacing: 0.15em;
     margin: 0;
   }
+
 
   .mobile-cart-btn {
     display: block !important;
