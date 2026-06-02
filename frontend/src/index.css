@@ -508,7 +508,44 @@ a:hover {
     margin: 0 !important;
     scrollbar-width: none !important;
   }
+
+  /* DETALLE PRODUCTO MOVIL */
+  .product-detail-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+    margin-top: 20px !important;
+  }
+
+  .product-main-image {
+    height: 380px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .product-info-container {
+    padding: 0 !important;
+  }
+
+  .product-title {
+    font-size: 1.8rem !important;
+    margin: 10px 0 !important;
+  }
+
+  .product-actions {
+    flex-direction: row !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+  }
+
+  .add-to-cart-btn {
+    flex: 3 !important;
+  }
+
+  .wishlist-btn-detail {
+    flex: 1 !important;
+  }
 }
+
 
 /* --- WHATSAPP FLOTANTE --- */
 .whatsapp-float {
