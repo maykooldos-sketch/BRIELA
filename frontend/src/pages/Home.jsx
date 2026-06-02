@@ -94,9 +94,7 @@ const Home = () => {
 
     return (
         <div className="container mt-4">
-            <h1 className="text-center" style={{ letterSpacing: '0.15em' }}>
-                EXCLUSIVA DE BRIELA
-            </h1>
+
 
 
             {/* Filtros de Categoría */}

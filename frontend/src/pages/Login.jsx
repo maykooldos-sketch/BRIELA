@@ -23,7 +23,7 @@ const Login = () => {
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
             <div className="container" style={{ maxWidth: '400px', width: '90%', padding: '40px', border: '1px solid var(--color-border)', backgroundColor: '#fff' }}>
-                <h2 className="text-center mb-4">ACCEDER</h2>
+
 
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
