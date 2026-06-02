@@ -90,7 +90,7 @@ const Cart = () => {
                 <>
                     <div style={{ borderTop: '1px solid var(--color-border)' }}>
                         {cartItems.map((item, index) => (
-                            <div key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0', borderBottom: '1px solid var(--color-border)' }}>
+                            <div key={index} className="cart-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 0', borderBottom: '1px solid var(--color-border)' }}>
                                 <div>
                                     <h4 style={{ fontFamily: 'var(--font-sans)', fontWeight: '600', letterSpacing: '0' }}>{item.product.name}</h4>
                                     <p style={{ color: 'var(--color-text-light)', fontSize: '0.9rem' }}>Cantidad: {item.quantity}</p>
@@ -110,10 +110,11 @@ const Cart = () => {
                         ))}
                     </div>
 
-                    <div style={{ marginTop: '40px', textAlign: 'right' }}>
+                    <div className="cart-summary" style={{ marginTop: '40px', textAlign: 'right' }}>
                         <h3 style={{ marginBottom: '20px', fontFamily: 'var(--font-sans)', letterSpacing: '0' }}>TOTAL: $ {total.toLocaleString('es-CO')} COP</h3>
                         <button className="btn btn-solid" style={{ width: 'auto', padding: '15px 40px' }} onClick={() => setStep(2)}>FINALIZAR COMPRA</button>
                     </div>
+
                 </>
             )}
         </div>

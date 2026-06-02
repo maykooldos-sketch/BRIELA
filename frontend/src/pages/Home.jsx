@@ -94,12 +94,15 @@ const Home = () => {
 
     return (
         <div className="container mt-4">
-            <h1 className="text-center" style={{ padding: '60px 0 20px', letterSpacing: '0.15em' }}>
+            <h1 className="text-center" style={{ letterSpacing: '0.15em' }}>
                 EXCLUSIVA DE BRIELA
             </h1>
 
+
             {/* Filtros de Categoría */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '50px', flexWrap: 'wrap' }}>
+            <div className="category-filters-container">
+
+
                 {categories.map(cat => (
                     <button
                         key={cat}
@@ -121,7 +124,8 @@ const Home = () => {
                 ))}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+            <div className="product-grid">
+
                 {loading ? (
                     Array(6).fill(0).map((_, i) => (
                         <div key={i} style={{ textAlign: 'center' }}>

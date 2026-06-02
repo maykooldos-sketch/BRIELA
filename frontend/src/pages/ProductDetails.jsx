@@ -67,12 +67,12 @@ const ProductDetails = () => {
     if (!product) return <div className="text-center mt-4"><h3>Cargando pieza...</h3></div>;
 
     return (
-        <div className="container" style={{ marginTop: '60px', marginBottom: '60px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
+        <div className="container" style={{ marginTop: '40px', marginBottom: '60px' }}>
+            <div className="product-detail-grid">
 
                 {/* LADO IZQUIERDO: GALERÍA DE IMÁGENES */}
                 <div>
-                    <div style={{
+                    <div className="product-main-image" style={{
                         width: '100%',
                         height: '500px',
                         backgroundColor: '#fafafa',
@@ -84,6 +84,7 @@ const ProductDetails = () => {
                         marginBottom: '20px',
                         overflow: 'hidden'
                     }}>
+
                         {product.images && product.images.length > 0 ? (
                             <img
                                 src={product.images[mainImage].startsWith('http') ? product.images[mainImage] : `${API_URL}/${product.images[mainImage]}`}
@@ -121,46 +122,40 @@ const ProductDetails = () => {
                 </div>
 
                 {/* LADO DERECHO: INFORMACIÓN DEL PRODUCTO */}
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <span style={{ textTransform: 'uppercase', fontSize: '0.8rem', color: 'var(--color-text-light)', letterSpacing: '0.1em' }}>
+                <div className="product-info-container">
+                    <span className="product-category-tag">
                         {product.category}
                     </span>
-                    <h1 style={{ fontSize: '2.5rem', margin: '15px 0' }}>{product.name}</h1>
+                    <h1 className="product-title">{product.name}</h1>
 
-                    <div style={{ fontSize: '1.2rem', marginBottom: '30px' }}>
+                    <div className="product-price">
                         $ {product.price.toLocaleString('es-CO')} COP
                     </div>
 
-                    <div style={{ padding: '20px 0', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)', marginBottom: '30px' }}>
-                        <h4 style={{ fontFamily: 'var(--font-sans)', fontSize: '0.85rem', marginBottom: '10px' }}>FICHA TÉCNICA</h4>
-                        <p style={{ color: 'var(--color-text-light)' }}>{product.description}</p>
+                    <div className="product-description-container">
+                        <h4 className="tech-specs-title">FICHA TÉCNICA</h4>
+                        <p className="product-description-text">{product.description}</p>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '20px' }}>
-                        <button className="btn btn-solid" style={{ flex: 1, padding: '20px' }} onClick={addToCart}>
+                    <div className="product-actions">
+                        <button className="btn btn-solid add-to-cart-btn" onClick={addToCart}>
                             AÑADIR AL CARRITO
                         </button>
                         <button
+                            className={`wishlist-btn-detail ${wishlist.includes(product?._id) ? 'active' : ''}`}
                             onClick={toggleWishlist}
-                            style={{
-                                width: '60px',
-                                border: '1px solid #000',
-                                background: 'none',
-                                fontSize: '1.5rem',
-                                cursor: 'pointer',
-                                color: wishlist.includes(product?._id) ? '#ff4d4d' : '#000',
-                                transition: 'all 0.3s'
-                            }}>
+                        >
                             {wishlist.includes(product?._id) ? '♥' : '♡'}
                         </button>
                     </div>
 
                     {/* Información de envío */}
-                    <div style={{ marginTop: '20px', fontSize: '0.8rem', color: 'var(--color-text-light)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <span>Envíos Nacionales Exprés de 0 a 4 días.</span>
-                        <span>Cambios y Devoluciones sin costo.</span>
+                    <div className="shipping-info">
+                        <span>• Envíos Nacionales Exprés de 0 a 4 días.</span>
+                        <span>• Cambios y Devoluciones sin costo.</span>
                     </div>
                 </div>
+
 
             </div>
         </div>
