@@ -317,35 +317,35 @@ a:hover {
   }
 
   .navbar-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
     align-items: center;
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 15px;
+    position: relative;
   }
 
   .mobile-toggle {
     display: block !important;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0;
+    justify-self: start;
+    z-index: 10;
   }
 
   .navbar .logo {
-    font-size: 1.5rem !important;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    font-size: 1.4rem !important;
+    text-align: center;
+    justify-self: center;
     margin: 0 !important;
+    white-space: nowrap;
   }
 
   .navbar-right {
     display: flex;
+    justify-self: end;
     gap: 15px;
-    font-size: 1.2rem;
+    z-index: 10;
   }
+
 
   .search-form {
     width: 100%;
