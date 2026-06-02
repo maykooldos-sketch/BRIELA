@@ -177,48 +177,9 @@ a:hover {
   white-space: nowrap;
 }
 
-.desktop-nav-links a,
-.desktop-user-actions a,
-.login-btn {
-  color: #666;
-  transition: color 0.3s;
-}
-
 .desktop-nav-links a:hover,
 .desktop-user-actions a:hover {
   color: #000;
-}
-
-/* Buscador Premium */
-.search-form {
-  max-width: 200px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.search-input {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  padding: 8px 0 8px 25px;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  background: transparent;
-  outline: none;
-  transition: all 0.3s;
-}
-
-.search-input:focus {
-  border-bottom-color: #000;
-}
-
-.search-form::before {
-  content: '🔍';
-  position: absolute;
-  left: 0;
-  font-size: 0.8rem;
-  opacity: 0.4;
 }
 
 .login-btn {
@@ -229,9 +190,87 @@ a:hover {
 }
 
 .login-btn:hover {
-  background: #000;
+  background: #000 !important;
   color: #fff !important;
 }
+
+
+/* Buscador Premium */
+.search-form {
+  max-width: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  background: transparent;
+  outline: none;
+  transition: all 0.3s;
+  text-transform: uppercase;
+}
+
+.search-input:focus {
+  border-bottom-color: #000;
+}
+
+/* Menu de Usuario Dropdown */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.account-link {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  padding: 10px 0;
+  border: 1px solid #f0f0f0;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-content a,
+.logout-link {
+  padding: 12px 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #666;
+  text-decoration: none;
+  text-align: left;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
+.dropdown-content a:hover,
+.logout-link:hover {
+  background-color: #f9f9f9;
+  color: #000;
+}
+
 
 
 /* Ocultar elementos móviles por defecto */
@@ -378,11 +417,18 @@ a:hover {
 
 /* --- VERSION MOVIL DEFINITIVA --- */
 @media (max-width: 992px) {
-  .nav-content {
-    grid-template-columns: 60px 1fr 60px;
-    padding: 0 20px;
+  .navbar {
+    padding: 10px 0 !important;
   }
 
+  .nav-content {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+
+  /* ESCONDER TODO LO QUE NO SEA LOGO/MENU/CARRITO */
   .desktop-nav-links,
   .desktop-user-actions,
   .search-form {
@@ -391,76 +437,76 @@ a:hover {
 
   .mobile-toggle {
     display: block !important;
-    background: none;
-    border: none;
-    font-size: 1.6rem;
-    cursor: pointer;
-    justify-self: start;
+    font-size: 1.8rem !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    color: #000 !important;
   }
 
   .navbar .logo {
-    font-size: 1.8rem;
-    letter-spacing: 0.15em;
-    margin: 0;
+    font-size: 1.5rem !important;
+    margin: 0 !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    white-space: nowrap !important;
   }
-
 
   .mobile-cart-btn {
     display: block !important;
-    font-size: 1.3rem;
-    justify-self: end;
+    font-size: 1.4rem !important;
+    color: #000 !important;
   }
 
   /* Cajon Lateral */
   .mobile-drawer {
     display: flex !important;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100vh;
-    background: #fff;
-    z-index: 2000;
-    transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    padding: 40px;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: #fff !important;
+    z-index: 9999 !important;
+    transition: left 0.4s cubic-bezier(0.77, 0, 0.175, 1) !important;
+    padding: 40px !important;
   }
 
   .mobile-drawer.active {
-    left: 0;
+    left: 0 !important;
   }
 
   .drawer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 40px !important;
+    border-bottom: 1px solid #eee !important;
+    padding-bottom: 20px !important;
   }
 
   .drawer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
   }
 
   .drawer-links a {
-    font-size: 1.5rem;
-    font-family: var(--font-serif);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 1.6rem !important;
+    font-family: var(--font-serif) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #000 !important;
   }
 
   .category-filters-container {
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding: 20px;
-    margin-bottom: 20px;
-    scrollbar-width: none;
-  }
-
-  .category-filters-container button {
-    flex: 0 0 auto;
-    padding: 8px 20px;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding: 15px !important;
+    margin: 0 !important;
+    scrollbar-width: none !important;
   }
 }
 
@@ -468,7 +514,8 @@ a:hover {
 .whatsapp-float {
   position: fixed;
   bottom: 30px;
-  left: 30px;
+  right: 30px;
+  /* Lo muevo a la derecha para no tapar texto */
   background-color: #000;
   color: #fff;
   width: 60px;
@@ -479,6 +526,7 @@ a:hover {
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  border: 1px solid #fff;
 }
 
 @media (max-width: 992px) {
@@ -486,9 +534,10 @@ a:hover {
     width: 50px;
     height: 50px;
     bottom: 20px;
-    left: 20px;
+    right: 20px;
   }
 }
+
 
 .skeleton {
   background: #eee;
